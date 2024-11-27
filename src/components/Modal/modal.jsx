@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const Modal = ({ department, onClose }) => {
+const Modal = ({ department, onClose, userRole }) => {
   const [isRoleAddOpen, setIsRoleAddOpen] = useState(false);
   const [newRole, setNewRole] = useState("");
   const [selectedPermissions, setSelectedPermissions] = useState([]);
@@ -90,7 +90,6 @@ const Modal = ({ department, onClose }) => {
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex lg:justify-end lg:items-start justify-center items-end">
       <div
         className="bg-white w-full lg:w-[40%] lg:h-full h-[80%] rounded-t-2xl lg:rounded-none lg:rounded-l-2xl overflow-y-auto shadow-lg transform transition-transform duration-300 ease-in-out"
-       
       >
         <div className="p-6">
           <div className="flex justify-between items-center mb-4">
@@ -126,17 +125,19 @@ const Modal = ({ department, onClose }) => {
           </div>
 
           {/* Add Role Button */}
-          <div className="mb-4">
-            <button
-              className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-              onClick={() => setIsRoleAddOpen(!isRoleAddOpen)}
-            >
-              {isRoleAddOpen ? "Cancel" : "Add Role"}
-            </button>
-          </div>
+          {userRole === "Admin" && (
+            <div className="mb-4">
+              <button
+                className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+                onClick={() => setIsRoleAddOpen(!isRoleAddOpen)}
+              >
+                {isRoleAddOpen ? "Cancel" : "Add Role"}
+              </button>
+            </div>
+          )}
 
           {/* Add Role Form */}
-          {isRoleAddOpen && (
+          {isRoleAddOpen && userRole === "Admin" && (
             <div className="mb-4">
               <div className="mb-2">
                 <input
@@ -199,7 +200,9 @@ const Modal = ({ department, onClose }) => {
                   <th className="border p-2 text-left">Name</th>
                   <th className="border p-2 text-left">Status</th>
                   <th className="border p-2 text-left">Role</th>
+                  {role =="Admin" || role == "Editor" && (
                   <th className="border p-2 text-left">Actions</th>
+                  )}
                 </tr>
               </thead>
               <tbody>
@@ -208,55 +211,59 @@ const Modal = ({ department, onClose }) => {
                     <td className="border p-2">{member.name}</td>
                     <td className="border p-2">{member.status}</td>
                     <td className="border p-2">
-                    {isEditing === index ? (
-                      <select
-                        value={role}
-                        onChange={(e) => setRole(e.target.value)}
-                        className="border p-2 rounded"
-                      >
-                        {roles.map((r) => (
-                          <option key={r.roleName} value={r.roleName}>
-                            {r.roleName}
-                          </option>
-                        ))}
-                      </select>
-                    ) : (
-                      member.role
-                    )}
-                  </td>
-                  <td className="border p-2">
-                    {isEditing === index ? (
-                      <>
-                        <button
-                          onClick={() => handleSaveClick(index)}
-                          className="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-600"
+                      {isEditing === index ? (
+                        <select
+                          value={role}
+                          onChange={(e) => setRole(e.target.value)}
+                          className="border p-2 rounded"
                         >
-                          Save
-                        </button>
-                        <button
-                          onClick={handleCancelClick}
-                          className="bg-red-500 text-white py-1 px-2 rounded ml-2 hover:bg-red-600"
-                        >
-                          Cancel
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <button
-                          onClick={() => handleEditClick(index)}
-                          className="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-600"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          onClick={() => handleDeleteClick(index)}
-                          className="bg-red-500 text-white py-1 px-2 rounded ml-2 hover:bg-red-600"
-                        >
-                          Delete
-                        </button>
-                      </>
-                    )}
-                  </td>
+                          {roles.map((r) => (
+                            <option key={r.roleName} value={r.roleName}>
+                              {r.roleName}
+                            </option>
+                          ))}
+                        </select>
+                      ) : (
+                        member.role
+                      )}
+                    </td>
+                    <td className="border p-2">
+                      {isEditing === index ? (
+                        <>
+                          <button
+                            onClick={() => handleSaveClick(index)}
+                            className="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-600"
+                          >
+                            Save
+                          </button>
+                          <button
+                            onClick={handleCancelClick}
+                            className="bg-red-500 text-white py-1 px-2 rounded ml-2 hover:bg-red-600"
+                          >
+                            Cancel
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          {(userRole === "Admin" || userRole === "Editor") && (
+                            <button
+                              onClick={() => handleEditClick(index)}
+                              className="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-600"
+                            >
+                              Edit
+                            </button>
+                          )}
+                          {userRole === "Admin" && (
+                            <button
+                              onClick={() => handleDeleteClick(index)}
+                              className="bg-red-500 text-white py-1 px-2 rounded ml-2 hover:bg-red-600"
+                            >
+                              Delete
+                            </button>
+                          )}
+                        </>
+                      )}
+                    </td>
                   </tr>
                 ))}
               </tbody>

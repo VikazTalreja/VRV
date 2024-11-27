@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";  // Import useSelector for accessing Redux store
+import { useSelector } from "react-redux"; 
 import mockUsers from "../data/User.json";
 
 const Users = () => {
@@ -9,8 +9,7 @@ const Users = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
 
-  // Get user role from Redux store
-  const role = useSelector((state) => state.role);
+  const role = useSelector((state) => state.role.role);
 
   const getInitials = (name) => {
     const splitName = name.split(" ");
@@ -178,6 +177,7 @@ const Modal = ({ user, onClose, onSave, onDelete, role }) => {
     }
   };
 
+  console.log("console k andar Role",role)
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
       <div className="bg-white w-96 p-6 rounded-lg shadow-lg">
@@ -201,7 +201,7 @@ const Modal = ({ user, onClose, onSave, onDelete, role }) => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        {user && role !== "Viewer" && (
+        {role !== "Viewer" && (
           <button
             onClick={() => setStatus(status === "Active" ? "Inactive" : "Active")}
             className={`w-full p-2 rounded-lg text-white font-medium mb-4 ${
@@ -212,7 +212,7 @@ const Modal = ({ user, onClose, onSave, onDelete, role }) => {
           </button>
         )}
         <div className="flex justify-end gap-3">
-          {user && role !== "Viewer" && (
+        {role !== "Viewer" &&(
             <button
               className="px-4 py-2 bg-red-500 text-white rounded-lg font-medium"
               onClick={() => onDelete(user.id)}
@@ -220,18 +220,21 @@ const Modal = ({ user, onClose, onSave, onDelete, role }) => {
               Delete
             </button>
           )}
-          <button
+           <button
             className="px-4 py-2 bg-gray-500 text-white rounded-lg font-medium"
             onClick={onClose}
           >
             Cancel
           </button>
+           
+            {role !== "Viewer" && (
           <button
             className="px-4 py-2 bg-blue-500 text-white rounded-lg font-medium"
             onClick={handleSave}
           >
             Save
           </button>
+           )}
         </div>
       </div>
     </div>

@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
-import Card from "../components/Card/card"; 
+import { useSelector } from "react-redux";
+import Card from "../components/Card/card";
 import mockDepartments from "../data/mockTeams.json";
-import Modal from "../components/Modal/modal"; 
+import Modal from "../components/Modal/modal";
 
 const Projects = () => {
   const [departments, setDepartments] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDepartment, setSelectedDepartment] = useState(null);
+
+  // Fetch the user's role from Redux store
+  const role = useSelector((state) => state.role.role); // Adjust according to your Redux store setup
 
   useEffect(() => {
     const fetchDepartments = async () => {
@@ -33,7 +37,7 @@ const Projects = () => {
     <div className="min-h-screen bg-indigo-100 flex flex-col">
       <header className="bg-indigo-600 text-white p-6 shadow-md">
         <h1 className="text-4xl font-bold">Departments</h1>
-          </header>
+      </header>
 
       <main className="p-6">
         <div className="flex flex-col justify-center items-center sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -51,7 +55,11 @@ const Projects = () => {
 
       {/* Modal */}
       {isModalOpen && selectedDepartment && (
-        <Modal department={selectedDepartment} onClose={CloseModal} />
+        <Modal
+          department={selectedDepartment}
+          onClose={CloseModal}
+          userRole={role} // Pass role to modal for permissions
+        />
       )}
 
       <footer className="bg-indigo-600 text-white p-4 mt-auto shadow-inner">
