@@ -64,7 +64,7 @@ const Users = () => {
   return (
     <>
       <header className="bg-indigo-600 text-white p-6 shadow-md">
-        <h1 className="text-4xl font-bold">Departments</h1>
+        <h1 className="text-4xl font-bold">Users</h1>
       </header>
       <div className="p-6 bg-indigo-100 min-h-screen">
         {/* Search and Filter Section */}
