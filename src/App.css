@@ -1,0 +1,5 @@
+/* Inside the modal component's style */
+.transition-transform {
+    transition: transform 0.3s ease-in-out;
+  }
+  

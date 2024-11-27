@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "departmentName": "Human Resources",
+    "teamLead": "Emma Johnson"
+  },
+  {
+    "id": 2,
+    "departmentName": "Operations",
+    "teamLead": "Liam Smith"
+  },
+  {
+    "id": 3,
+    "departmentName": "Marketing",
+    "teamLead": "Sophia Williams"
+  },
+  {
+    "id": 4,
+    "departmentName": "Finance",
+    "teamLead": "Noah Brown"
+  },
+  {
+    "id": 5,
+    "departmentName": "Research and Development",
+    "teamLead": "Olivia Davis"
+  },
+  {
+    "id": 6,
+    "departmentName": "Customer Support",
+    "teamLead": "James Wilson"
+  },
+  {
+    "id": 7,
+    "departmentName": "IT Services",
+    "teamLead": "Isabella Martinez"
+  },
+  {
+    "id": 8,
+    "departmentName": "Product Development",
+    "teamLead": "Benjamin Rodriguez"
+  },
+  {
+    "id": 9,
+    "departmentName": "Sales",
+    "teamLead": "Charlotte Moore"
+  },
+  {
+    "id": 10,
+    "departmentName": "Quality Assurance",
+    "teamLead": "Lucas Anderson"
+  }
+]
