@@ -107,16 +107,8 @@ To set up this project on your local machine, follow the instructions below:
 - **Used in**: The central place to configure and initialize Redux.
 
 ---
+## Demo Video
 
-## Running the Application:
+Click the image below to watch the video:
 
-1. **Clone the repository** (if not already done):
-   ```bash
-   git clone https://github.com/your-username/role-based-dashboard.git
-
-2. **Install dependencies**
-    cd role-based-dashboard
-    npm install
-
-3. **Run the app**
-    npm run dev
+[![Vidyard Video](https://play.vidyard.com/gJRdVQGGuS6eWN2GeDViuD.jpg)](https://play.vidyard.com/gJRdVQGGuS6eWN2GeDViuD)
